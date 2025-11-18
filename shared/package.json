@@ -1,0 +1,36 @@
+{
+  "name": "@guss/shared",
+  "version": "0.0.1",
+  "description": "Shared types and contracts for GUS project",
+  "type": "module",
+  "main": "./dist/types.js",
+  "types": "./dist/types.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/types.js",
+      "default": "./dist/types.js"
+    },
+    "./types": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/types.js",
+      "default": "./dist/types.js"
+    },
+    "./api-contracts": {
+      "types": "./dist/api-contracts.d.ts",
+      "import": "./dist/api-contracts.js",
+      "default": "./dist/api-contracts.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch --preserveWatchOutput"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
+

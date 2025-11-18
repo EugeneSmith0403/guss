@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  name      String
+  password  String
+  createdAt Int
+
+  roles       UserRole[]
+  authTokens  UserAuth[] @relation("UserAuthTokens")
+  rounds      RoundUser[]
+  wins        Round[]    @relation("RoundWinner")
+}
+
+model UserRole {
+  id     Int    @id @default(autoincrement())
+  role   String
+
+  userId Int
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model UserAuth {
+  id        Int     @id @default(autoincrement())
+  token     String  @unique
+  isActive  Boolean @default(true)
+
+  userId    Int
+  user      User    @relation("UserAuthTokens", fields: [userId], references: [id])
+}
+
+model Round {
+  id          String      @id @default(uuid())
+  start       Int
+  end         Int
+  status      RoundStatus
+  totalScore  Int         @default(0)
+  winnerId    Int?
+  winnerUser  User?       @relation("RoundWinner", fields: [winnerId], references: [id])
+
+  users       RoundUser[]
+}
+
+model RoundUser {
+  roundId String
+  userId  Int
+  score   Int   @default(0)
+
+  round   Round @relation(fields: [roundId], references: [id])
+  user    User  @relation(fields: [userId], references: [id])
+
+  @@id([roundId, userId])
+}
+
+enum RoundStatus {
+  active
+  cooldown
+  complete
+}
+

@@ -1,0 +1,75 @@
+import {
+  Injectable,
+  Logger,
+  OnModuleDestroy,
+  OnModuleInit,
+  Scope,
+} from '@nestjs/common';
+import { Redis } from 'ioredis';
+import { REDIS_URL } from '@shared/config';
+
+@Injectable({ scope: Scope.TRANSIENT })
+export class RedisService implements OnModuleDestroy {
+  private readonly logger = new Logger(RedisService.name);
+  private readonly defaultTtl = 3600;
+  private client: Redis;
+
+  constructor() {
+    this.client = new Redis(REDIS_URL);
+
+    if (!process.env.REDIS_URL) {
+      this.logger.warn(
+        `REDIS_URL is not set. Falling back to default connection string "${REDIS_URL}".`,
+      );
+    }
+  }
+
+  async onModuleDestroy() {
+    await this.client.quit();
+  }
+
+  getClient(): Redis {
+    return this.client;
+  }
+
+  async increment(key: string, by: number = 1): Promise<number> {
+    const value = await this.client.incrby(key, by);
+    await this.client.expire(key, this.defaultTtl);
+    return value;
+  }
+
+  async get(key: string): Promise<number> {
+    const value = await this.client.get(key);
+    return value ? parseInt(value, 10) : 0;
+  }
+
+  async getString(key: string): Promise<string | null> {
+    return this.client.get(key);
+  }
+
+  async set(key: string, value: number | string): Promise<void> {
+    await this.client.set(key, value.toString());
+    await this.client.expire(key, this.defaultTtl);
+  }
+
+  async delete(key: string): Promise<void> {
+    await this.client.del(key);
+  }
+
+  async deleteMany(keys: string[]): Promise<void> {
+    if (!keys.length) {
+      return;
+    }
+    await this.client.del(...keys);
+  }
+
+  async keys(pattern: string): Promise<string[]> {
+    return this.client.keys(pattern);
+  }
+
+  async exists(key: string): Promise<boolean> {
+    const result = await this.client.exists(key);
+    return result === 1;
+  }
+}
+

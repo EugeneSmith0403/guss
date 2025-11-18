@@ -1,0 +1,15 @@
+{
+  "name": "turborepo-monorepo",
+  "private": true,
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "clean": "turbo clean && rm -rdf node_modules .turbo .store"
+  },
+  "devDependencies": {
+    "turbo": "latest",
+    "typescript": "^5.9.3"
+  }
+}

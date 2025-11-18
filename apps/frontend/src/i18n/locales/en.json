@@ -1,0 +1,46 @@
+{
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "button": "Sign in",
+    "error": "Incorrect password",
+    "required": "This field is required"
+  },
+  "rounds": {
+    "title": "Rounds",
+    "create": "Create round",
+    "status": {
+      "active": "Active",
+      "cooldown": "Cooldown",
+      "complete": "Completed"
+    },
+    "start": "Start",
+    "end": "End",
+    "status_label": "Status"
+  },
+  "round": {
+    "active": "Round active!",
+    "cooldown": "Cooldown",
+    "complete": "Round completed",
+    "time_left": "Time left: {{value}}",
+    "my_score": "My score: {{value}}",
+    "starts_in": "Starts in: {{value}}",
+    "total_score": "Total",
+    "winner": "Winner",
+    "no_winner": "No winner",
+    "points": "points"
+  },
+  "errors": {
+    "required": "This field is required",
+    "invalid_credentials": "Username or password is incorrect",
+    "network_error": "Network error. Please try again."
+  },
+  "common": {
+    "logout": "Logout",
+    "loading": "Loading...",
+    "error": "Error",
+    "back": "Back"
+  }
+}
+

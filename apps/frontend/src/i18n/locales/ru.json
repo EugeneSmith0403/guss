@@ -1,0 +1,46 @@
+{
+  "login": {
+    "title": "Вход",
+    "username": "Имя пользователя",
+    "password": "Пароль",
+    "button": "Войти",
+    "error": "Неверный пароль",
+    "required": "Это поле обязательно"
+  },
+  "rounds": {
+    "title": "Раунды",
+    "create": "Создать раунд",
+    "status": {
+      "active": "Активен",
+      "cooldown": "Ожидание",
+      "complete": "Завершен"
+    },
+    "start": "Начало",
+    "end": "Конец",
+    "status_label": "Статус"
+  },
+  "round": {
+    "active": "Раунд активен!",
+    "cooldown": "Ожидание",
+    "complete": "Раунд завершен",
+    "time_left": "Осталось времени: {{value}}",
+    "my_score": "Мои очки: {{value}}",
+    "starts_in": "Начнется через: {{value}}",
+    "total_score": "Всего",
+    "winner": "Победитель",
+    "no_winner": "Нет победителя",
+    "points": "очков"
+  },
+  "errors": {
+    "required": "Это поле обязательно",
+    "invalid_credentials": "Неверное имя пользователя или пароль",
+    "network_error": "Ошибка сети. Попробуйте еще раз."
+  },
+  "common": {
+    "logout": "Выход",
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "back": "Назад"
+  }
+}
+

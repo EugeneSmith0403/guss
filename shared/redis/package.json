@@ -1,0 +1,25 @@
+{
+  "name": "@shared/redis",
+  "version": "0.0.1",
+  "description": "Shared Redis module for NestJS services",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch --preserveWatchOutput"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.1",
+    "ioredis": "^5.8.2",
+    "@shared/config": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.7",
+    "typescript": "^5.7.3"
+  }
+}
+
