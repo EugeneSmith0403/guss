@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
-    "ioredis": "^5.8.2",
-    "@shared/config": "workspace:*"
+    "@nestjs/config": "^4.0.2",
+    "ioredis": "^5.8.2"
   },
   "devDependencies": {
     "@types/node": "^22.10.7",

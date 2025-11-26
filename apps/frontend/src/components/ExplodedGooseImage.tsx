@@ -18,12 +18,10 @@ export const ExplodedGooseImage = ({ className }: ExplodedGooseImageProps) => {
           filter: 'drop-shadow(0 0 15px rgba(184,0,0,0.6))',
         }}
       >
-        {/* === BLOOD POOL === */}
         <ellipse cx="150" cy="240" rx="100" ry="40" fill="#8B0000" opacity="0.7" />
         <ellipse cx="150" cy="240" rx="90" ry="35" fill="#B80000" opacity="0.8" />
         <ellipse cx="150" cy="240" rx="75" ry="28" fill="#DC143C" opacity="0.6" />
 
-        {/* === LEGS (still standing) === */}
         <rect x="140" y="250" width="10" height="30" fill="#222" />
         <rect x="160" y="250" width="10" height="30" fill="#222" />
         <rect x="143" y="260" width="4" height="15" fill="#D1D5DB" opacity="0.7" />
@@ -31,7 +29,6 @@ export const ExplodedGooseImage = ({ className }: ExplodedGooseImageProps) => {
         <ellipse cx="145" cy="283" rx="7" ry="5" fill="#111" />
         <ellipse cx="165" cy="283" rx="7" ry="5" fill="#111" />
 
-        {/* === BLOOD SPLATTERS === */}
         <circle cx="80" cy="120" r="8" fill="#B80000" opacity="0.7">
           <animate attributeName="opacity" values="0.7;0.4;0.7" dur="2s" repeatCount="indefinite" />
         </circle>
@@ -47,7 +44,6 @@ export const ExplodedGooseImage = ({ className }: ExplodedGooseImageProps) => {
         <circle cx="70" cy="200" r="5" fill="#8B0000" opacity="0.5" />
         <circle cx="230" cy="210" r="7" fill="#DC143C" opacity="0.4" />
 
-        {/* === INTESTINES/GUTS === */}
         <path
           d="M 150 200 Q 120 150 90 120 Q 100 100 120 90 Q 140 95 150 100 Q 160 85 180 80 Q 200 85 210 100 Q 220 120 200 140 Q 180 160 150 200"
           fill="#8B4513"
@@ -64,19 +60,16 @@ export const ExplodedGooseImage = ({ className }: ExplodedGooseImageProps) => {
           opacity="0.6"
         />
 
-        {/* === BONE FRAGMENTS === */}
         <ellipse cx="110" cy="130" rx="8" ry="4" fill="#F0F0F0" opacity="0.8" transform="rotate(45 110 130)" />
         <ellipse cx="190" cy="110" rx="6" ry="3" fill="#E5E7EB" opacity="0.7" transform="rotate(-30 190 110)" />
         <ellipse cx="130" cy="90" rx="5" ry="2.5" fill="#F5F5F5" opacity="0.6" transform="rotate(60 130 90)" />
         <ellipse cx="170" cy="85" rx="7" ry="3.5" fill="#E8E8E8" opacity="0.7" transform="rotate(-45 170 85)" />
 
-        {/* === FLESH CHUNKS === */}
         <ellipse cx="100" cy="140" rx="12" ry="8" fill="#8B0000" opacity="0.7" />
         <ellipse cx="200" cy="125" rx="10" ry="6" fill="#A52A2A" opacity="0.6" />
         <ellipse cx="120" cy="100" rx="8" ry="5" fill="#8B0000" opacity="0.5" />
         <ellipse cx="180" cy="95" rx="9" ry="6" fill="#B80000" opacity="0.6" />
 
-        {/* === FEATHERS FLYING === */}
         <ellipse cx="60" cy="80" rx="6" ry="3" fill="#4A524A" opacity="0.6" transform="rotate(20 60 80)">
           <animate attributeName="cy" values="80;60;80" dur="3s" repeatCount="indefinite" />
           <animate attributeName="opacity" values="0.6;0.2;0.6" dur="3s" repeatCount="indefinite" />
@@ -92,7 +85,6 @@ export const ExplodedGooseImage = ({ className }: ExplodedGooseImageProps) => {
           <animate attributeName="cy" values="160;140;160" dur="2.8s" repeatCount="indefinite" />
         </ellipse>
 
-        {/* === BLOOD DRIPPING FROM LEGS === */}
         <path
           d="M 145 250 L 143 260 L 147 260 Z"
           fill="#B80000"
@@ -115,7 +107,6 @@ export const ExplodedGooseImage = ({ className }: ExplodedGooseImageProps) => {
           <animate attributeName="opacity" values="0.6;0.2;0.6" dur="1.7s" repeatCount="indefinite" />
         </path>
 
-        {/* === SMOKE/STEAM === */}
         <circle cx="150" cy="200" r="15" fill="rgba(100,100,100,0.3)">
           <animate attributeName="r" values="15;25;15" dur="2s" repeatCount="indefinite" />
           <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2s" repeatCount="indefinite" />
@@ -129,13 +120,11 @@ export const ExplodedGooseImage = ({ className }: ExplodedGooseImageProps) => {
           <animate attributeName="opacity" values="0.25;0.08;0.25" dur="1.8s" repeatCount="indefinite" />
         </circle>
 
-        {/* === GLOWING BLOOD POOL === */}
         <ellipse cx="150" cy="240" rx="100" ry="40" fill="rgba(184,0,0,0.1)">
           <animate attributeName="rx" values="100;105;100" dur="3s" repeatCount="indefinite" />
           <animate attributeName="ry" values="40;42;40" dur="3s" repeatCount="indefinite" />
         </ellipse>
 
-        {/* === CLICKABLE AREA (transparent) === */}
         <rect x="50" y="50" width="200" height="250" fill="transparent" pointerEvents="none" />
       </svg>
     </div>

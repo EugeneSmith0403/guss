@@ -68,8 +68,7 @@ docker compose -f docker-compose.dev.yml logs -f
 После запуска PostgreSQL, необходимо применить миграции и сгенерировать Prisma Client:
 
 ```bash
-cd apps/api
-pnpm prisma migrate dev
+pnpm prisma:migrate
 ```
 
 Это выполнит:
@@ -79,14 +78,12 @@ pnpm prisma migrate dev
 Для генерации только Prisma Client (без миграций):
 
 ```bash
-cd apps/api
-pnpm prisma generate
+pnpm prisma:generate
 ```
 
 Для заполнения базы данных начальными данными:
 
 ```bash
-cd apps/api
 pnpm prisma:seed
 ```
 
@@ -165,20 +162,20 @@ pnpm clean
 
 ### Prisma команды
 
-```bash
-cd apps/api
+Все команды Prisma выполняются из корня проекта:
 
+```bash
 # Применить миграции
-pnpm prisma migrate dev
+pnpm prisma:migrate
 
 # Сгенерировать Prisma Client
-pnpm prisma generate
+pnpm prisma:generate
 
 # Заполнить базу данных
 pnpm prisma:seed
 
 # Открыть Prisma Studio (GUI для базы данных)
-pnpm prisma studio
+pnpm prisma:studio
 ```
 
 ## Структура проекта

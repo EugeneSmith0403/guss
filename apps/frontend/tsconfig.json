@@ -14,10 +14,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
-    "paths": {
-      "@guss/shared/*": ["../../shared/*"],
-      "@shared/config": ["../../shared/config"]
-    },
 
     /* Linting */
     "strict": true,

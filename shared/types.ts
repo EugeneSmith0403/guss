@@ -9,11 +9,11 @@ export interface Round {
   end: number;
   status: 'active' | 'cooldown' | 'complete';
   totalScore: number;
-  winnerId?: number;
-  winner?: {
-    id: number;
-    name: string;
-    score: number;
+  winnerId?: number | null;
+  winner: {
+    id?: number;
+    name?: string;
+    score?: number;
   };
   userRound?: {
     score: number;

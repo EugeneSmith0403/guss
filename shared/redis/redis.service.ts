@@ -5,8 +5,8 @@ import {
   OnModuleInit,
   Scope,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Redis } from 'ioredis';
-import { REDIS_URL } from '@shared/config';
 
 @Injectable({ scope: Scope.TRANSIENT })
 export class RedisService implements OnModuleDestroy {
@@ -14,12 +14,15 @@ export class RedisService implements OnModuleDestroy {
   private readonly defaultTtl = 3600;
   private client: Redis;
 
-  constructor() {
-    this.client = new Redis(REDIS_URL);
+  constructor(private readonly configService: ConfigService) {
+    const redisUrl =
+      this.configService.get<string>('roundProcessor.redis.url') ||
+      this.configService.getOrThrow<string>('backend.redis.url');
+    this.client = new Redis(redisUrl);
 
     if (!process.env.REDIS_URL) {
       this.logger.warn(
-        `REDIS_URL is not set. Falling back to default connection string "${REDIS_URL}".`,
+        `REDIS_URL is not set. Falling back to default connection string "${redisUrl}".`,
       );
     }
   }

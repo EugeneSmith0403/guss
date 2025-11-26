@@ -1,6 +1,5 @@
-import { getFrontendApiUrl } from '@shared/config';
+const API_BASE_URL = import.meta.env.VITE_API_URL ?? ''
 
-const API_BASE_URL = getFrontendApiUrl();
 
 export interface ApiError {
   message: string;
@@ -22,13 +21,11 @@ class ApiClient {
     const token = this.getToken();
     const url = `${this.baseUrl}${endpoint}`;
 
-    const headers: HeadersInit = {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    };
+    const headers = new Headers(options.headers);
+    headers.set('Content-Type', 'application/json');
 
     if (token) {
-      headers['Authorization'] = `Bearer ${token}`;
+      headers.set('Authorization', `Bearer ${token}`);
     }
 
     const response = await fetch(url, { ...options, headers });

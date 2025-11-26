@@ -1,6 +1,5 @@
 import { apiClient } from './client';
 import type { AuthResponse } from '@guss/shared/api-contracts';
-import type { User } from '@guss/shared/types';
 
 export interface LoginRequest {
   name: string;

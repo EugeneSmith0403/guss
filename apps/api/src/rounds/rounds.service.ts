@@ -3,17 +3,19 @@ import { RoundsRepository } from './repository/rounds.repository';
 import { RedisService } from '@shared/redis';
 import type { Round } from '@guss/shared/types';
 import { RoundStatus } from '@prisma/client';
-import { getRoundDurations } from './rounds.config';
+
 import {
   getCurrentUnixTimeSeconds,
   calculateRoundStatus,
 } from './rounds.utils';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class RoundsService {
   constructor(
     private readonly roundsRepository: RoundsRepository,
     private readonly redisService: RedisService,
+    private readonly configService: ConfigService
   ) {}
 
   private getUserScoreKey(roundId: string, userId: number): string {
@@ -26,9 +28,14 @@ export class RoundsService {
 
   async create(): Promise<{ id: string }> {
     const now = getCurrentUnixTimeSeconds();
-    const durations = getRoundDurations();
-    const start = now + durations.cooldown;
-    const end = start + durations.duration;
+    const rounds = this.configService.get('backend.rounds');
+    
+    if (!rounds) {
+      throw new Error('Rounds config is not available');
+    }
+    
+    const start = now + rounds.cooldown;
+    const end = start + rounds.duration;
     const round = await this.roundsRepository.create(
       start,
       end,
@@ -48,7 +55,12 @@ export class RoundsService {
       end: round.end,
       status: calculateRoundStatus(round.status, round.start, round.end, now),
       totalScore: round.totalScore,
-      winnerId: round.winnerId || undefined,
+      winnerId: round.winnerId,
+      winner: round.winnerId
+        ? {
+            id: round.winnerId,
+          }
+        : {},
     }));
   }
 
@@ -66,7 +78,12 @@ export class RoundsService {
       end: round.end,
       status: calculateRoundStatus(round.status, round.start, round.end, now),
       totalScore: round.totalScore,
-      winnerId: round.winnerId || undefined,
+      winnerId: round?.winnerId,
+      winner: round.winnerId
+        ? {
+            id: round.winnerId,
+          }
+        : {},
     };
   }
 
@@ -86,22 +103,22 @@ export class RoundsService {
       ? round.users.find((ru) => ru.userId === round.winnerId)
       : null;
 
-    const userRound = userRoundData || redisUserScore
-      ? {
-          roundId: round.id,
-          userId: userRoundData?.userId ?? userId,
-          score: userRoundData?.score || Number(redisUserScore) || 0,
-          userName: userRoundData?.user?.name || '',
-        }
-      : undefined;
+    const userRound: Round['userRound'] = {
+      roundId: round.id,
+      userId: userRoundData?.userId ?? userId,
+      score: userRoundData?.score ?? Number(redisUserScore) ?? 0,
+      userName: userRoundData?.user?.name ?? '',
+    };
 
-    const winner = round.winnerUser && winnerRoundData
+    const winner: Round['winner'] = round.winnerId
       ? {
-          id: round.winnerUser.id,
-          name: round.winnerUser.name,
-          score: winnerRoundData.score ?? 0,
+          id: round.winnerUser?.id ?? round.winnerId,
+          name: round.winnerUser?.name ?? '',
+          score: winnerRoundData?.score ?? 0,
         }
-      : undefined;
+      : {};
+
+    const winnerId = round.status !== RoundStatus.complete && now >= round.end ? undefined : round.winnerId
 
     return {
       id: round.id,
@@ -109,7 +126,7 @@ export class RoundsService {
       end: round.end,
       status: calculateRoundStatus(round.status, round.start, round.end, now),
       totalScore: round.totalScore ?? Number(redisTotalScore) ?? 0,
-      winnerId: round.winnerId || undefined,
+      winnerId,
       userRound,
       winner,
     };

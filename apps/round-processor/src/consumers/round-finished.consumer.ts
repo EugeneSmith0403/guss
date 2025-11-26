@@ -27,11 +27,11 @@ export class RoundFinishedConsumer implements OnModuleInit {
   ) {}
 
   async onModuleInit(): Promise<void> {
-    await this.rabbitService.assertQueue(ROUND_COMPLETED_QUEUE);
     await this.rabbitService.consume<RoundCompletedMessage>(
       ROUND_COMPLETED_QUEUE,
       async (message) => this.handleMessage(message),
     );
+    this.logger.log('Round finished consumer initialized');
   }
 
   private async handleMessage({
@@ -48,12 +48,9 @@ export class RoundFinishedConsumer implements OnModuleInit {
       await this.roundRepository.upsertRoundUsers(roundId, users);
 
       const winner = this.findWinner(users);
+      const winnerId = winner?.userId ?? null;
 
-      await this.roundRepository.completeRound(
-        roundId,
-        totalScore,
-        winner?.userId,
-      );
+      await this.roundRepository.completeRound(roundId, totalScore, winnerId);
 
       await this.redisService.deleteMany([totalScoreKey, ...userScoreKeys]);
 

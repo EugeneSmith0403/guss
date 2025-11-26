@@ -62,7 +62,7 @@ export class RoundRepository {
   async completeRound(
     roundId: string,
     totalScore: number,
-    winnerId?: number,
+    winnerId?: number | null,
   ): Promise<void> {
     await this.prisma.round.update({
       where: { id: roundId },

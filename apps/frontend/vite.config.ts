@@ -4,15 +4,12 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
-  resolve: {
-    alias: {
-      '@guss/shared': path.resolve(__dirname, '../../shared'),
-      '@shared/config': path.resolve(__dirname, '../../shared/config'),
-    },
-  },
   server: {
     port: 8080,
     open: true,
   },
+  // Читать .env файлы из корня монорепо
+  envDir: path.resolve(__dirname, '../../'),
+  envPrefix: 'VITE_',
 })
 

@@ -33,15 +33,15 @@ export const RoundPage = () => {
     refetchInterval: (query) => {
       const round = query.state.data as Round | null | undefined;
       if (!round) return false;
-      
+
       const now = Math.floor(Date.now() / 1000);
       const isComplete = now >= round.end;
-      const hasNoWinner = !round.winner;
-      
-      if (isComplete && hasNoWinner) {
+      const isWinnerPending = typeof round.winnerId === 'undefined';
+
+      if (isComplete && isWinnerPending) {
         return 2000;
       }
-      
+
       return false;
     },
   });

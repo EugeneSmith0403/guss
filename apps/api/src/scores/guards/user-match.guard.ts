@@ -16,6 +16,14 @@ export class UserMatchGuard implements CanActivate {
       throw new ForbiddenException("You cannot modify another user's data");
     }
 
+    const isAdmin =
+      Array.isArray(authUser.roles) &&
+      authUser.roles.some((role) => role.role === 'admin');
+
+    if (isAdmin) {
+      throw new ForbiddenException('Admins cannot increment scores');
+    }
+
     return true;
   }
 }

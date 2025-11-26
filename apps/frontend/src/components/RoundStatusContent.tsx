@@ -22,6 +22,7 @@ export const RoundStatusContent = ({
   isAdmin = false,
 }: RoundStatusContentProps) => {
   const { t } = useTranslation();
+  const isWinnerPending = typeof round.winnerId === 'undefined';
 
   if (status === 'cooldown') {
     return (
@@ -60,26 +61,28 @@ export const RoundStatusContent = ({
       <Typography variant="h5" sx={{ mb: 2, color: 'primary.main' }}>
         {t('round.complete')}
       </Typography>
-      {round.winner ? (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mt: 2 }}>
-          <Typography variant="body1">
-            {t('round.total_score')}: {round.totalScore}
-          </Typography>
-          <Typography variant="body1" sx={{ color: 'primary.main', fontWeight: 'bold' }}>
-            {t('round.winner')}: {round.winner.name} - {round.winner.score}
-          </Typography>
-          {!isAdmin && (
-            <Typography variant="body1">
-              {t('round.my_score', { value: displayScore })}
-            </Typography>
-          )}
-        </Box>
-      ) : (
+      {isWinnerPending ? (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', mt: 4, gap: 2 }}>
           <CircularProgress />
           <Typography variant="body1" sx={{ color: 'text.secondary' }}>
             {t('common.loading')}...
           </Typography>
+        </Box>
+      ) : (
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mt: 2 }}>
+          <Typography variant="body1">
+            {t('round.total_score')}: {round.totalScore}
+          </Typography>
+          {round.winner && (
+            <Typography variant="body1" sx={{ color: 'primary.main', fontWeight: 'bold' }}>
+              {t('round.winner')}: {round.winner.name} - {round.winner.score}
+            </Typography>
+          )}
+          {!isAdmin && (
+            <Typography variant="body1">
+              {t('round.my_score', { value: displayScore })}
+            </Typography>
+          )}
         </Box>
       )}
     </>

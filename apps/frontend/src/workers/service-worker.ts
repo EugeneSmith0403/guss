@@ -76,11 +76,12 @@ const flushScoreQueue = async (): Promise<void> => {
   }
 };
 
-self.addEventListener('fetch', (event: FetchEvent) => {
-  const url = new URL(event.request.url);
+self.addEventListener('fetch', (event: Event) => {
+  const fetchEvent = event as FetchEvent;
+  const url = new URL(fetchEvent.request.url);
 
-  if (url.pathname.startsWith('/scores/rounds') && event.request.method === 'PATCH') {
-    event.respondWith(
+  if (url.pathname.startsWith('/scores/rounds') && fetchEvent.request.method === 'PATCH') {
+    fetchEvent.respondWith(
       (async () => {
         const isOnline = self.navigator ? navigator.onLine : true;
 
@@ -94,7 +95,7 @@ self.addEventListener('fetch', (event: FetchEvent) => {
         }
 
         try {
-          return await fetch(event.request);
+          return await fetch(fetchEvent.request);
         } catch (error) {
           const match = url.pathname.match(/\/scores\/rounds\/([^/]+)\/users\/(\d+)/);
           if (match) {
@@ -108,9 +109,10 @@ self.addEventListener('fetch', (event: FetchEvent) => {
   }
 });
 
-self.addEventListener('sync', (event: SyncEvent) => {
-  if (event.tag === 'sync-score-queue') {
-    event.waitUntil(flushScoreQueue());
+self.addEventListener('sync', (event: Event) => {
+  const syncEvent = event as unknown as SyncEvent;
+  if (syncEvent.tag === 'sync-score-queue') {
+    syncEvent.waitUntil(flushScoreQueue());
   }
 });
 

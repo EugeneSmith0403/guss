@@ -12,8 +12,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 if (import.meta.env.PROD) {
   registerServiceWorker()
-} else if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.ready.then(() => {
-    console.log('Service Worker ready in development')
-  })
 }

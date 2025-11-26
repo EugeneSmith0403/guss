@@ -16,11 +16,11 @@
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/schedule": "^6.0.1",
     "@prisma/client": "^6.19.0",
-    "@shared/config": "workspace:*",
     "@shared/db": "workspace:*",
     "@shared/redis": "workspace:*",
     "amqp-connection-manager": "^5.0.0",
     "amqplib": "^0.10.9",
+    "dotenv": "^16.6.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },
@@ -28,10 +28,10 @@
     "@nestjs/cli": "^11.0.0",
     "@nestjs/schematics": "^11.0.0",
     "@nestjs/testing": "^11.0.1",
+    "@types/amqplib": "^0.10.7",
     "@types/node": "^22.10.7",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.7.3"
   }
 }
-

@@ -23,6 +23,9 @@ importers:
       '@nestjs/common':
         specifier: ^11.0.1
         version: 11.1.9(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      '@nestjs/config':
+        specifier: ^4.0.0
+        version: 4.0.2(@nestjs/common@11.1.9(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2))(rxjs@7.8.2)
       '@nestjs/core':
         specifier: ^11.0.1
         version: 11.1.9(@nestjs/common@11.1.9(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/platform-express@11.1.9)(reflect-metadata@0.2.2)(rxjs@7.8.2)
@@ -38,9 +41,6 @@ importers:
       '@prisma/client':
         specifier: ^6.19.0
         version: 6.19.0(prisma@6.19.0(typescript@5.9.3))(typescript@5.9.3)
-      '@shared/config':
-        specifier: workspace:*
-        version: link:../../shared/config
       '@shared/db':
         specifier: workspace:*
         version: link:../../shared/db
@@ -68,6 +68,9 @@ importers:
       class-validator:
         specifier: ^0.14.2
         version: 0.14.2
+      dotenv:
+        specifier: ^16.6.1
+        version: 16.6.1
       prisma:
         specifier: ^6.19.0
         version: 6.19.0(typescript@5.9.3)
@@ -165,9 +168,6 @@ importers:
       '@mui/material':
         specifier: ^5.15.0
         version: 5.18.0(@emotion/react@11.14.0(@types/react@18.3.27)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.27)(react@18.3.1))(@types/react@18.3.27)(react@18.3.1))(@types/react@18.3.27)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@shared/config':
-        specifier: workspace:*
-        version: link:../../shared/config
       '@tanstack/react-query':
         specifier: ^5.17.0
         version: 5.90.10(react@18.3.1)
@@ -274,9 +274,6 @@ importers:
       '@prisma/client':
         specifier: ^6.19.0
         version: 6.19.0(prisma@6.19.0(typescript@5.9.3))(typescript@5.9.3)
-      '@shared/config':
-        specifier: workspace:*
-        version: link:../../shared/config
       '@shared/db':
         specifier: workspace:*
         version: link:../../shared/db
@@ -289,6 +286,9 @@ importers:
       amqplib:
         specifier: ^0.10.9
         version: 0.10.9
+      dotenv:
+        specifier: ^16.6.1
+        version: 16.6.1
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
@@ -305,6 +305,9 @@ importers:
       '@nestjs/testing':
         specifier: ^11.0.1
         version: 11.1.9(@nestjs/common@11.1.9(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.9)(@nestjs/platform-express@11.1.9)
+      '@types/amqplib':
+        specifier: ^0.10.7
+        version: 0.10.8
       '@types/node':
         specifier: ^22.10.7
         version: 22.19.1
@@ -324,26 +327,17 @@ importers:
         specifier: ^5.7.3
         version: 5.9.3
 
-  shared/config:
-    devDependencies:
-      '@types/node':
-        specifier: ^22.10.7
-        version: 22.19.1
-      typescript:
-        specifier: ^5.7.3
-        version: 5.9.3
-
   shared/db:
     dependencies:
       '@nestjs/common':
         specifier: ^11.0.1
         version: 11.1.9(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      '@nestjs/config':
+        specifier: ^4.0.2
+        version: 4.0.2(@nestjs/common@11.1.9(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2))(rxjs@7.8.2)
       '@prisma/client':
         specifier: ^6.19.0
         version: 6.19.0(prisma@6.19.0(typescript@5.9.3))(typescript@5.9.3)
-      '@shared/config':
-        specifier: workspace:*
-        version: link:../config
     devDependencies:
       '@types/node':
         specifier: ^22.10.7
@@ -357,9 +351,9 @@ importers:
       '@nestjs/common':
         specifier: ^11.0.1
         version: 11.1.9(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2)
-      '@shared/config':
-        specifier: workspace:*
-        version: link:../config
+      '@nestjs/config':
+        specifier: ^4.0.2
+        version: 4.0.2(@nestjs/common@11.1.9(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2))(rxjs@7.8.2)
       ioredis:
         specifier: ^5.8.2
         version: 5.8.2

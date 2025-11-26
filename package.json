@@ -6,7 +6,12 @@
     "dev": "turbo run dev",
     "build": "turbo run build",
     "lint": "turbo run lint",
-    "clean": "turbo clean && rm -rdf node_modules .turbo .store"
+    "clean": "turbo clean && rm -rdf node_modules .turbo .store",
+    "clean:prisma-cache": "rm -rf ~/Library/Caches/pnpm/dlx",
+    "prisma:generate": "pnpm dlx prisma@6.19.0 generate --schema apps/api/prisma/schema.prisma",
+    "prisma:migrate": "pnpm dlx prisma@6.19.0 migrate dev --schema apps/api/prisma/schema.prisma",
+    "prisma:seed": "pnpm --filter api exec ts-node prisma/seed.ts",
+    "prisma:studio": "pnpm dlx prisma@6.19.0 studio --schema apps/api/prisma/schema.prisma"
   },
   "devDependencies": {
     "turbo": "latest",

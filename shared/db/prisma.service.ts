@@ -5,7 +5,7 @@ import {
   OnModuleInit,
 } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
-import { DATABASE_URL } from '@shared/config';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class PrismaService
@@ -14,18 +14,21 @@ export class PrismaService
 {
   private readonly logger = new Logger(PrismaService.name);
 
-  constructor() {
+  constructor(readonly configService: ConfigService) {
+    const databaseUrl =
+      configService.get<string>('roundProcessor.database.url') ||
+      configService.getOrThrow<string>('backend.database.url');
     super({
       datasources: {
         db: {
-          url: DATABASE_URL,
+          url: databaseUrl,
         },
       },
     });
 
     if (!process.env.DATABASE_URL) {
       this.logger.warn(
-        `DATABASE_URL is not set. Falling back to default connection string "${DATABASE_URL}".`,
+        `DATABASE_URL is not set. Falling back to default connection string "${databaseUrl}".`,
       );
     }
   }

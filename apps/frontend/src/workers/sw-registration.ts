@@ -5,9 +5,7 @@ export const registerServiceWorker = async () => {
         scope: '/',
       });
 
-      console.log('Service Worker registered:', registration);
-
-      if ('sync' in registration) {
+      if ('sync' in registration && registration.sync) {
         await registration.sync.register('sync-score-queue');
       }
 
